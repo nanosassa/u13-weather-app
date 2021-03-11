@@ -1,0 +1,11 @@
+.App {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.WeatherCard {
+  display: inline-grid;
+  margin: 5px !important;
+  height: 450px;
+}
+
