@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./css/App.css";
 
+import LoadingSpinner from "./components/loadingSpinner";
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
 
@@ -21,6 +22,9 @@ class App extends Component {
   }
 
   callWeatherData(address) {
+
+    this.setState({loading: true});
+
     const url = `https://localhost:44306/forecast/${address}`;
 
     fetch(url)
@@ -33,15 +37,23 @@ class App extends Component {
         this.setState({
           weatherData: weatherObj,
           searchDone: true,
-          errorMessage: ""
+          errorMessage: "",
+          loading: false
         });
       })
       .catch(error => {
         // If an error is catch, it's sent to SearchBar as props
-        this.setState({ errorMessage: error.message });
+        this.setState({ 
+          errorMessage: error.message,
+          loading: false
+         });
       });
 
     function handleErrors(response) {
+      if(response.status === 404) {
+        throw Error('Address not found');
+      }
+
       if (!response.ok) {
         throw Error(response.statusText);
       }
@@ -53,7 +65,8 @@ class App extends Component {
     const {
       searchDone,
       weatherData,
-      errorMessage
+      errorMessage,
+      loading
     } = this.state;
     
     return (
@@ -62,6 +75,11 @@ class App extends Component {
           callBackFromParent={this.callWeatherData}
           error={errorMessage}
         />
+        
+        {loading ? 
+        
+        <LoadingSpinner /> : 
+        
         <div className="row">
           <div className="col-sm-6">
           {searchDone && 
@@ -70,10 +88,13 @@ class App extends Component {
               .map((item, i) =>  
               <WeatherCard
                 weatherData={item}
+                key={i}
               />
           )}
           </div>
         </div>
+        }
+
       </div>
     );
   }

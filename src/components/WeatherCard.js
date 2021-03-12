@@ -9,18 +9,21 @@ class WeatherCard extends Component {
 
     return (
       <div className="WeatherCard">
-        <p>{name}</p>
+        <h3>{name}</h3>
         <h1 className="WeatherCard-degrees">{temperature} {temperatureUnit}°</h1>
         <div className="WeatherCard-icon-container">
           <img src={`${icon}`} alt="icon"/>
-          <h2 className="WeatherCard-city">
+          <h4>
             {shortForecast}
-          </h2>
-          <p className="WeatherCardDetails">{detailedForecast}</p>
+          </h4>
+          <p>
+            {detailedForecast.substring(0, 70)}
+          </p>
         </div>
       </div>
     );
   }
 }
+
 
 export default WeatherCard;

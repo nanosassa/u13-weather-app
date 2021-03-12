@@ -44,37 +44,7 @@ describe("App", () => {
     it("receives its props", () => {
       expect(Object.keys(searchBar.props()).length).toBe(2);
     });
-
-    it("should display a message, if a search is done without text", () => {
-      // fakeEvent was created to define preventDefault() in handleChange function
-      const fakeEvent = { preventDefault: () => console.log("preventDefault") };
-      expect(searchBar.find("Form").length).toBe(1);
-      searchBar.find('Form').simulate('submit', fakeEvent);
-      expect(searchBar.find('Message').length).toBe(1);
-    });
-  });
-
-  describe("`WeatherCard`", () => {
-    let wrapper;
-    beforeEach(() => {
-      const weatherData = {
-        weather: 'Cloudy',
-        city: 'Espoo',
-        country: 'FI',
-        temp: 10
-      };
-      const savedCities = ['Helsinki'];
-      const updateSavedCities = jest.fn();
-      wrapper = mount(<WeatherCard weatherData={weatherData} savedCities={savedCities} callBackFromParent={updateSavedCities} />);
-    });
-
-    it("exists", () => {
-      expect(wrapper.exists()).toBe(true);
-    });
-
-    it("receives its props", () => {
-      expect(Object.keys(wrapper.props()).length).toBe(3);
-    });
-  });
+    
+  });  
 
 });

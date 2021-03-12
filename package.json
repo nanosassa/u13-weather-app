@@ -9,6 +9,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
+    "react-show-more-text": "^1.4.6",
     "semantic-ui-react": "^0.78.3"
   },
   "scripts": {
