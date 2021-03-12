@@ -45,6 +45,7 @@ class App extends Component {
         // If an error is catch, it's sent to SearchBar as props
         this.setState({ 
           errorMessage: error.message,
+          searchDone: false,
           loading: false
          });
       });
@@ -78,7 +79,7 @@ class App extends Component {
         
         {loading ? 
         
-        <LoadingSpinner /> : 
+        <div className="Centered"><LoadingSpinner /></div>: 
         
         <div className="row">
           <div className="col-sm-6">
