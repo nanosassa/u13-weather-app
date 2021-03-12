@@ -11,8 +11,7 @@ class App extends Component {
     this.state = {
       weatherData: {
         address: "",
-        weather: "",
-        temp: 0
+        days: ""        
       },
       searchDone: false,
       errorMessage: ""
@@ -21,8 +20,7 @@ class App extends Component {
     this.callWeatherData = this.callWeatherData.bind(this);
   }
 
-  callWeatherData(address) {
-
+  callWeatherData(address, days) {
     this.setState({loading: true});
 
     const url = `https://localhost:44306/forecast/${address}`;
@@ -32,7 +30,8 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => {
         const weatherObj = {
-          periods: data.properties.periods
+          periods: data.properties.periods,
+          days: days
         };
         this.setState({
           weatherData: weatherObj,
@@ -85,7 +84,7 @@ class App extends Component {
           <div className="col-sm-6">
           {searchDone && 
           weatherData.periods
-              .filter((item, i) => i % 2 === 0)
+              .filter((item, i) => (i % 2 === 0 && Number(i/2) <= weatherData.days - 1))
               .map((item, i) =>  
               <WeatherCard
                 weatherData={item}

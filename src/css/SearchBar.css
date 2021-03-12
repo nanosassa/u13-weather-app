@@ -7,6 +7,10 @@
   width: 30rem;
 }
 
+.SearchBar-select {
+  margin-left: 60px;
+}
+
 .SearchBar .message {
   width: 20rem;
   margin: 0 auto 2rem;
